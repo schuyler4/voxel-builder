@@ -57,7 +57,6 @@ var zoomInButton = document.getElementById('in');
 var zoomOutButton = document.getElementById('out');
 
 zoomInButton.addEventListener('click', function(event) {
-  console.log
   camera.position.z += increment;
 }, false);
 
@@ -69,18 +68,28 @@ window.onload = function() {
   build()
 }
 
+var startX;
+var startY;
+
 document.addEventListener('mousedown', function(event) {
   mousedown = true;
+  startX = event.screenX;
+  startY = event.screenY;
 });
 
 document.addEventListener('mousemove', function(event) {
   if(mousedown) {
-    var offsetX = event.screenX - event.clientX ;
-    var offsetY = event.screenY - event.clientY;
-    //camera.position.x = event.screenX / 100;
-    //camera.position.y = event.screenY / 100;
-    camera.position.x += offsetX;
-    camera.position.y += offsetY;
+    if(startX > event.screenX) {
+      camera.position.x += 0.1;
+    } else if(startX < event.screenX) {
+      camera.position.x -= 0.1;
+    }
+
+    if(startY > event.screenY) {
+      camera.position.y -= 0.1;
+    } else if(startY < event.screenY) {
+      camera.position.y += 0.1;
+    }
   }
 });
 
@@ -88,4 +97,4 @@ document.addEventListener('mouseup', function(event) {
   mousedown = false;
 });
 
-buildButton.addEventListener('click', build, false)
+buildButton.addEventListener('click', build, false);
