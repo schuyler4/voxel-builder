@@ -1,1 +1,5 @@
 three.min.js
+.DS_Store
+./__pychache__
+__pychache__
+data.db
