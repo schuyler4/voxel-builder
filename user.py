@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from main import Base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import *
+from base import Base
+
 
 class User(Base):
     __tablename__ = "user"
@@ -9,7 +11,7 @@ class User(Base):
     username = Column(String(80), unique=True)
     password = Column(String(80))
 
-    def __init__(self, username, email):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 

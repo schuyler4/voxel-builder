@@ -15,6 +15,9 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.cs
 </head>
 <body>
   {% block body %}
+    {% if session["user_id"] %}
+      <h1> you are loged in </h1>
+    {% endif %}
   {% endblock %}
 </body>
 </html>

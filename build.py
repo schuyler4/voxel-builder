@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from main import Base
-
-from user import User
 from sqlalchemy import *
+from user import User
+from base import Base
+
 
 class Build(Base):
     __tablename__ = "build"
@@ -10,7 +10,7 @@ class Build(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(80))
     code = Column(String())
-    user = Column(Integer, ForeignKey('user.id'))
+    user = Column(Integer, ForeignKey("user.id"))
 
     def __init__(self, title, code, user):
         self.title = title

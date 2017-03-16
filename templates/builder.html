@@ -1,34 +1,28 @@
-<!doctype html>
-<html>
-<head>
-  <title>Voxel Builder</title>
-  <style>
-    #editor {
-      width: 150px;
-      height: 450px;
-      margin: 10px;
-      color: white;
-      background-color: black;
-      resize: none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-    }
-
-  </style>
-</head>
-<body>
-  <div id="notWorkingDiv">
-  </div>
-  <textarea id="editor">
-  </textarea>
-  <button id='buildButton'>Build</button>
-  <button id="in"> - </button>
-  <button id="out"> + </button>
-  <label> background: <input id="backgroundSelector"></label>
-  <label> box: <input id="boxColor"></label>
-  <button id="changeColorButton">Change Color</button>
-  <script type="text/javascript" src="{{ url_for('static', filename='three.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
-</body>
-</html>
+{% extends "index.html" %}
+{% block body %}
+<style>
+#editor {
+  width: 150px;
+  height: 450px;
+  margin: 10px;
+  color: white;
+  background-color: black;
+  resize: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+</style>
+<div id="notWorkingDiv">
+</div>
+<textarea id="editor">
+</textarea>
+<button id='buildButton'>Build</button>
+<button id="in"> - </button>
+<button id="out"> + </button>
+<label> background: <input id="backgroundSelector"></label>
+<label> box: <input id="boxColor"></label>
+<button id="changeColorButton">Change Color</button>
+<script type="text/javascript" src="{{ url_for('static', filename='three.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

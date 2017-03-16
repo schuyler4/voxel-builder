@@ -1,21 +1,50 @@
-from flask import Blueprint, render_template, request, redirect
-
-from main import db_session
+from flask import Blueprint, render_template, request, redirect, session
+from database import db_session
 from user import User
+from base import Base
 
 auth = Blueprint("auth", __name__, template_folder="templates")
 
+def validate_user(username, password):
+    user = db_session.query(User).filter_by(username=username).first()
+    if not user and username != '' and password != '':
+        return True
+    else:
+        return False
+
+
+def find_user(username, password):
+    user = db_session.query(User).filter_by(username=username,
+        password=password).first()
+    return user
+
 @auth.route("/signup", methods=["GET", "POST"])
 def signup():
-    print("signint up")
+    error = None
     if request.method == "POST":
-        user = User(request.form["username"], request.form["password"])
-        db_session.add(user)
-        db_session.commit()
-        return redirect('/')
-    else:
-        return render_template("signup.html")
+        if validate_user(request.form["username"], request.form["password"]):
+            user = User(request.form["username"], request.form["password"])
+            db_session.add(user)
+            db_session.commit()
+            session['user_id'] = request.form["username"]
+            return redirect('/')
+        else:
+            error = 'You did something wrong'
+    return render_template("signup.html", error=error)
 
-@auth.route("/login")
+
+@auth.route("/login", methods=["GET", "POST"])
 def login():
-    return "This will be the login page"
+    error = None
+    if request.method == "POST":
+        if find_user(request.form["username"], request.form["password"]):
+            session["user_id"] = request.form["username"]
+            return redirect("/")
+        else:
+            error = "You did something wrong"
+    return render_template("login.html", error=error)
+
+@auth.route("/logout", methods=["POST"])
+def logout():
+    session["user_id"] = None
+    return redirect("/")
