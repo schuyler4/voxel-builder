@@ -57,11 +57,11 @@ var zoomInButton = document.getElementById('in');
 var zoomOutButton = document.getElementById('out');
 
 zoomInButton.addEventListener('click', function(event) {
-  camera.position.z += increment;
+  camera.position.z += increment * 10;
 }, false);
 
 zoomOutButton.addEventListener('click', function(event) {
-  camera.position.z -= increment;
+  camera.position.z -= increment * 10;
 }, false);
 
 window.onload = function() {
@@ -98,3 +98,12 @@ document.addEventListener('mouseup', function(event) {
 });
 
 buildButton.addEventListener('click', build, false);
+
+var backgroundColor = document.getElementById('backgroundSelector');
+var boxColor = document.getElementById('boxColor');
+var changeColorButton = document.getElementById('changeColorButton');
+
+changeColorButton.addEventListener('click', function() {
+  renderer.setClearColor(backgroundColor.value);
+  scene.children[0].material.color.setRGB(255, 255, 255);
+});
