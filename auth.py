@@ -3,7 +3,7 @@ from database import db_session
 from user import User
 from base import Base
 
-auth = Blueprint("auth", __name__, template_folder="templates")
+auth_blueprint = Blueprint("auth", __name__, template_folder="templates")
 
 def validate_user(username, password):
     user = db_session.query(User).filter_by(username=username).first()
@@ -18,7 +18,7 @@ def find_user(username, password):
         password=password).first()
     return user
 
-@auth.route("/signup", methods=["GET", "POST"])
+@auth_blueprint.route("/signup", methods=["GET", "POST"])
 def signup():
     error = None
     if request.method == "POST":
@@ -33,7 +33,7 @@ def signup():
     return render_template("signup.html", error=error)
 
 
-@auth.route("/login", methods=["GET", "POST"])
+@auth_blueprint.route("/login", methods=["GET", "POST"])
 def login():
     error = None
     if request.method == "POST":
@@ -44,7 +44,7 @@ def login():
             error = "You did something wrong"
     return render_template("login.html", error=error)
 
-@auth.route("/logout", methods=["POST"])
+@auth_blueprint.route("/logout", methods=["POST"])
 def logout():
     session["user_id"] = None
     return redirect("/")

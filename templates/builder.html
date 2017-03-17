@@ -13,10 +13,12 @@
   box-shadow: none;
 }
 </style>
-<div id="notWorkingDiv">
-</div>
-<textarea id="editor">
-</textarea>
+{% if error %}
+  {{ error }}
+{% endif %}
+<textarea id="editor"> {{ build.code }} </textarea>
+<label>title:<input id="title" value="{{ build.title }}"></label>
+<button id="save">Save</button>
 <button id='buildButton'>Build</button>
 <button id="in"> - </button>
 <button id="out"> + </button>
@@ -24,5 +26,5 @@
 <label> box: <input id="boxColor"></label>
 <button id="changeColorButton">Change Color</button>
 <script type="text/javascript" src="{{ url_for('static', filename='three.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='builder.js') }}"></script>
 {% endblock %}

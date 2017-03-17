@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="container">
+  <h1>{{ build.title }}</h1>
+  <pre id="code">
+    {{ build.code }}
+  </pre>
+  <h4>{{ user.username }}</h4>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='three.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='build.js') }}"></script>
+{% endblock %}

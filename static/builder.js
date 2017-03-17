@@ -12,7 +12,7 @@ renderer.setSize(width, height);
 renderer.setClearColor(0x3399ff);
 document.body.appendChild(renderer.domElement);
 
-function render(){
+function render() {
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
@@ -44,7 +44,6 @@ function build(event) {
 }
 
 let editorTextField = document.getElementById('editor')
-editorTextField.value = 'voxel(0, 0, 0)';
 
 var light = new THREE.PointLight(0xffffff, 1.2);
 light.position.set(0, 0, 6)
@@ -107,3 +106,33 @@ changeColorButton.addEventListener('click', function() {
   renderer.setClearColor(backgroundColor.value);
   scene.children[0].material.color.setRGB(255, 255, 255);
 });
+
+var title = document.getElementById('title');
+var save = document.getElementById('save');
+
+var url = window.location.href
+console.log(url)
+id = url.split('/')[4]
+
+jQuery.each( [ "put", "delete" ], function( i, method ) {
+  jQuery[ method ] = function( url, data, callback, type ) {
+    if ( jQuery.isFunction( data ) ) {
+      type = type || callback;
+      callback = data;
+      data = undefined;
+    }
+
+    return jQuery.ajax({
+      url: url,
+      type: method,
+      dataType: type,
+      data: data,
+      success: callback
+    });
+  };
+});
+
+save.addEventListener('click', function() {
+  $.put('/builder/' + id, {title: title.value, code: editorTextField.value});
+  console.log('clicked')
+}, false);

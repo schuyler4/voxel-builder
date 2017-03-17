@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>this is a profile page</h1>
+  <form action='/profile' method='POST'>
+    <button type="submit">New</button>
+  </form>
+  <ul>
+    {% for build in builds %}
+      <li> <a href="builder/{{ build.id }}"> {{ build.title }} </a> </li>
+    {% endfor %}
+  </ul>
+</div>
