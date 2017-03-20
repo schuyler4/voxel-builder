@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, session, g
 from auth import auth_blueprint
 from builder import builder_blueprint
 from sqlalchemy.ext.declarative import declarative_base
@@ -13,8 +13,15 @@ app.secret_key = 'fsaldkfj809fds800fs008098'
 
 @app.route('/')
 def start():
-    return 'this will be the start page'
+    return render_template('start.html')
 
+@app.errorhandler(404)
+def pageNotFound(error):
+	return "404 page not found"
+
+@app.errorhandler(500)
+def internal_error(error):
+    return "500 server error"
 
 if __name__ == "__main__":
     app.run(debug=True)

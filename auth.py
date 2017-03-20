@@ -27,7 +27,7 @@ def signup():
             db_session.add(user)
             db_session.commit()
             session['user_id'] = request.form["username"]
-            return redirect('/')
+            return redirect('/profile')
         else:
             error = 'You did something wrong'
     return render_template("signup.html", error=error)
@@ -39,7 +39,7 @@ def login():
     if request.method == "POST":
         if find_user(request.form["username"], request.form["password"]):
             session["user_id"] = request.form["username"]
-            return redirect("/")
+            return redirect("/profile")
         else:
             error = "You did something wrong"
     return render_template("login.html", error=error)

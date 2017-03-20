@@ -1,5 +1,7 @@
+{% extends "index.html" %}
+{% block body %}
 <div class="container">
-  <h1>this is a profile page</h1>
+  <h1>Your Projects</h1>
   <form action='/profile' method='POST'>
     <button type="submit">New</button>
   </form>
@@ -9,3 +11,4 @@
     {% endfor %}
   </ul>
 </div>
+{% endblock %}

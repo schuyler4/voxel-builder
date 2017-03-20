@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block body %}
+<h1>results</h1>
+<ul>
+{% if results %}
+	{% for result in results %}
+		<li>{{ result.title }}</li>
+	{% endfor %}
+{% endif %}
+</ul>
+{% endblock %}

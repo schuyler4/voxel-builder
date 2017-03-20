@@ -16,10 +16,14 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.cs
 </head>
 <body>
   <div class="container">
-    <form action="/search" method="POST">
-      <input type="text">
-      <button type="submit">Search</button>
-    </form>
+  	{% if session["user_id"] %}
+	  	<h4><a href="/profile">Your Projects</a></h4>
+	  	<form action="/logout" method="POST">
+	  		<button>Log Out</button>
+	  	</form>
+	{% else %}
+		<h1>Voxel Builder</h1>
+	{% endif %}
     {% block body %}
     {% endblock %}
   </div>
