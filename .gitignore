@@ -3,3 +3,10 @@ three.min.js
 ./__pychache__
 __pychache__
 data.db
+*.pyc
+.pyc
+/.pyc
+*/venv
+./venv
+venv/
+__pychache__/
